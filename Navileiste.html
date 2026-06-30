@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Freimaurerloge – Hauptnavigation</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&family=Teko:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --nav-height: 72px;
+    --bg:         #06060c;
+    --gold:       #c9a84c;
+    --gold-bright:#f0c040;
+    --red:        #d93025;
+    --red-bright: #ff3b2f;
+    --blue:       #3a8fd1;
+    --blue-bright:#60b8ff;
+    --text:       rgba(255,255,255,0.88);
+    --text-dim:   rgba(255,255,255,0.38);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html, body {
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:var(--bg);
+    font-family:'Inter', Arial, sans-serif;
+}
+
+/* ── NAV ── */
+.navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-height);
+    background: rgba(6,6,12,0.96);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    z-index: 99999;
+    padding: 0 24px;
+}
+
+/* Gold shimmer line at top of nav */
+.navbar::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        var(--gold) 30%,
+        var(--gold-bright) 50%,
+        var(--gold) 70%,
+        transparent 100%);
+    opacity: 0.5;
+}
+
+/* ── BRAND ── */
+.brand {
+    position: absolute;
+    left: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    text-decoration: none;
+}
+
+.brand-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    background: rgba(6,6,12,0.9);
+    box-shadow:
+        0 0 10px rgba(201,168,76,0.35),
+        0 0 22px rgba(201,168,76,0.18),
+        inset 0 0 8px rgba(201,168,76,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: box-shadow .3s;
+}
+
+.brand:hover .brand-icon {
+    box-shadow:
+        0 0 16px rgba(240,192,64,0.6),
+        0 0 36px rgba(240,192,64,0.3),
+        inset 0 0 12px rgba(240,192,64,0.1);
+}
+
+.brand-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.brand-text {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-shadow: 0 0 18px rgba(201,168,76,0.55);
+    transition: color .25s, text-shadow .25s;
+}
+
+.brand:hover .brand-text {
+    color: var(--gold-bright);
+    text-shadow: 0 0 28px rgba(240,192,64,0.8);
+}
+
+/* ── BRAND ICON SVG (Standardfarbe Gold) ── */
+.brand-icon svg polygon,
+.brand-icon svg circle,
+.brand-icon svg path {
+    stroke: var(--gold);
+    transition: stroke .25s, fill .25s;
+}
+.brand-icon svg circle:last-of-type {
+    fill: var(--gold);
+}
+
+/* ── THEME: ROT (Ebersberg V1 / V2) ── */
+.brand.theme-red .brand-text {
+    color: var(--red-bright);
+    text-shadow: 0 0 18px rgba(255,59,47,0.55);
+}
+.brand.theme-red .brand-icon {
+    box-shadow:
+        0 0 10px rgba(255,59,47,0.35),
+        0 0 22px rgba(255,59,47,0.18),
+        inset 0 0 8px rgba(255,59,47,0.06);
+}
+.brand.theme-red .brand-icon svg polygon,
+.brand.theme-red .brand-icon svg circle,
+.brand.theme-red .brand-icon svg path {
+    stroke: var(--red-bright);
+}
+.brand.theme-red .brand-icon svg circle:last-of-type {
+    fill: var(--red-bright);
+}
+
+/* ── THEME: BLAU (Equipment) ── */
+.brand.theme-blue .brand-text {
+    color: var(--blue-bright);
+    text-shadow: 0 0 18px rgba(96,184,255,0.55);
+}
+.brand.theme-blue .brand-icon {
+    box-shadow:
+        0 0 10px rgba(96,184,255,0.35),
+        0 0 22px rgba(96,184,255,0.18),
+        inset 0 0 8px rgba(96,184,255,0.06);
+}
+.brand.theme-blue .brand-icon svg polygon,
+.brand.theme-blue .brand-icon svg circle,
+.brand.theme-blue .brand-icon svg path {
+    stroke: var(--blue-bright);
+}
+.brand.theme-blue .brand-icon svg circle:last-of-type {
+    fill: var(--blue-bright);
+}
+
+/* ── NAV ITEMS WRAPPER ── */
+.nav-items {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+/* ── DIVIDER ── */
+.nav-divider {
+    width: 1px;
+    height: 20px;
+    background: rgba(255,255,255,0.15);
+    flex-shrink: 0;
+}
+
+/* ── NAV LINKS (no border/widget look) ── */
+.navbar a {
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 8px 26px;
+    cursor: pointer;
+    font-family: 'Teko', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color .25s, text-shadow .25s;
+    position: relative;
+    user-select: none;
+    white-space: nowrap;
+}
+
+/* Underline glow on hover/active */
+.navbar a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 26px; right: 26px;
+    height: 1px;
+    opacity: 0;
+    transition: opacity .25s;
+}
+
+/* ── GOLD (Freimaurerloge) ── */
+.navbar a.gold {
+    color: var(--text-dim);
+}
+.navbar a.gold:hover,
+.navbar a.gold.active {
+    color: var(--gold-bright);
+    text-shadow: 0 0 16px rgba(240,192,64,0.7);
+}
+.navbar a.gold::after {
+    background: var(--gold-bright);
+    box-shadow: 0 0 8px rgba(240,192,64,0.8);
+}
+.navbar a.gold:hover::after,
+.navbar a.gold.active::after {
+    opacity: 1;
+}
+
+/* ── RED (Ebersberg V2) ── */
+.navbar a.red {
+    color: var(--text-dim);
+}
+.navbar a.red:hover,
+.navbar a.red.active {
+    color: var(--red-bright);
+    text-shadow: 0 0 16px rgba(255,59,47,0.7);
+}
+.navbar a.red::after {
+    background: var(--red-bright);
+    box-shadow: 0 0 8px rgba(255,59,47,0.8);
+}
+.navbar a.red:hover::after,
+.navbar a.red.active::after {
+    opacity: 1;
+}
+
+/* ── BLUE (Equipment) ── */
+.navbar a.blue {
+    color: var(--text-dim);
+}
+.navbar a.blue:hover,
+.navbar a.blue.active {
+    color: var(--blue-bright);
+    text-shadow: 0 0 16px rgba(96,184,255,0.7);
+}
+.navbar a.blue::after {
+    background: var(--blue-bright);
+    box-shadow: 0 0 8px rgba(96,184,255,0.8);
+}
+.navbar a.blue:hover::after,
+.navbar a.blue.active::after {
+    opacity: 1;
+}
+
+/* ── LIVE DOT ── */
+.live-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--red-bright);
+    margin-left: 7px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+    box-shadow: 0 0 6px rgba(255,59,47,0.8);
+    animation: liveBlink 1.4s ease-in-out infinite;
+}
+
+@keyframes liveBlink {
+    0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(255,59,47,0.8); }
+    50%       { opacity: 0.15; box-shadow: none; }
+}
+
+/* ── IFRAME ── */
+#contentFrame {
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    width: 100%;
+    height: calc(100vh - var(--nav-height));
+    border: none;
+    background: #000;
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="brand" id="brandLink">
+        <div class="brand-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Triangle -->
+                <polygon points="12,2 22,20 2,20"
+                    stroke="#c9a84c" stroke-width="1.2" stroke-linejoin="round"
+                    fill="none"/>
+                <!-- Circle (iris) -->
+                <circle cx="12" cy="13.5" r="3"
+                    stroke="#c9a84c" stroke-width="1.1" fill="none"/>
+                <!-- Pupil dot -->
+                <circle cx="12" cy="13.5" r="1"
+                    fill="#c9a84c"/>
+                <!-- Upper eyelid arc -->
+                <path d="M8.5 13.5 Q12 9.5 15.5 13.5"
+                    stroke="#c9a84c" stroke-width="1" fill="none" stroke-linecap="round"/>
+                <!-- Lower eyelid arc -->
+                <path d="M8.5 13.5 Q12 17 15.5 13.5"
+                    stroke="#c9a84c" stroke-width="1" fill="none" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <span class="brand-text">FREIMAURER</span>
+    </div>
+
+    <div class="nav-items">
+        <a class="gold active" data-page="Startseite.html">Freimaurerloge</a>
+        <div class="nav-divider"></div>
+        <a class="red" data-page="Ebersberg V1.html">Ebersberg V1</a>
+        <div class="nav-divider"></div>
+        <a class="red" data-page="Ebersberg V2.html">Ebersberg V2<span class="live-dot"></span></a>
+        <div class="nav-divider"></div>
+        <a class="blue" data-page="Equpment.html">Equipment</a>
+    </div>
+</nav>
+
+<iframe id="contentFrame" src="Startseite.html"></iframe>
+
+<script>
+const frame   = document.getElementById('contentFrame');
+const links   = document.querySelectorAll('[data-page]');
+const brand   = document.getElementById('brandLink');
+
+function navigate(page, linkEl) {
+    frame.src = page;
+    links.forEach(l => l.classList.toggle('active', l.dataset.page === page));
+
+    brand.classList.remove('theme-red', 'theme-blue');
+    if (linkEl) {
+        if (linkEl.classList.contains('red')) {
+            brand.classList.add('theme-red');
+        } else if (linkEl.classList.contains('blue')) {
+            brand.classList.add('theme-blue');
+        }
+    }
+}
+
+links.forEach(l => {
+    l.addEventListener('click', () => navigate(l.dataset.page, l));
+});
+
+brand.addEventListener('click', () => navigate('Startseite.html'));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghost Busters — Equipment</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black:      #050810;
+    --card-bg:    rgba(5, 10, 28, 0.78);
+    --surface:    rgba(255,255,255,0.032);
+    --red:        #1a6fd4;
+    --red-bright: #4da3ff;
+    --orange:     #38bfff;
+    --text:       rgba(255,255,255,0.88);
+    --text-dim:   rgba(255,255,255,0.42);
+    --faint:      rgba(255,255,255,0.12);
+    --border:     rgba(30, 100, 220, 0.22);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    min-height: 100vh;
+    padding: 64px 24px 140px;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.5;
+  }
+
+  /* ── AMBIENT ORBS ── */
+  .bg-orb {
+    position: fixed; border-radius: 50%;
+    filter: blur(140px); pointer-events: none; z-index: 0;
+  }
+  .bg-orb-1 {
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(20,80,200,0.14) 0%, transparent 70%);
+    top: -250px; right: -250px;
+    animation: orbFloat 14s ease-in-out infinite alternate;
+  }
+  .bg-orb-2 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(40,140,255,0.08) 0%, transparent 70%);
+    bottom: 10%; left: -180px;
+    animation: orbFloat 18s ease-in-out infinite alternate-reverse;
+  }
+  @keyframes orbFloat { from { transform: translate(0,0); } to { transform: translate(40px,60px); } }
+
+  /* ── HEADER ── */
+  .page-header {
+    position: relative; z-index: 1;
+    max-width: 960px;
+    margin: 0 auto 56px;
+  }
+
+  .page-eyebrow {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.38em; color: var(--red);
+    text-transform: uppercase; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .page-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--red-bright);
+    box-shadow: 0 0 10px var(--red);
+    animation: pulseDot 2s ease-in-out infinite;
+  }
+  @keyframes pulseDot { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+  .page-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 9vw, 100px);
+    line-height: 0.88; letter-spacing: 0.02em;
+    background: linear-gradient(135deg, #ffffff 0%, #a8d4ff 45%, var(--red) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+
+  .page-sub {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px; letter-spacing: 0.22em;
+    color: var(--orange); margin-top: 14px;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    position: relative; z-index: 1;
+    max-width: 960px;
+    margin: 0 auto 48px;
+  }
+
+  .section-label {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Orbitron', monospace;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--red-bright);
+    box-shadow: 0 0 8px var(--red);
+    animation: pulseDot 2s ease-in-out infinite;
+  }
+  .section-label.optional { color: var(--text-dim); }
+  .section-label.optional::before {
+    background: rgba(255,255,255,0.2);
+    box-shadow: none;
+    animation: none;
+  }
+
+  /* ── TABLE HEAD ── */
+  .table-head {
+    display: grid;
+    grid-template-columns: 28px 2fr 2.5fr 1fr 80px 90px;
+    gap: 8px;
+    padding: 0 16px 10px;
+    font-family: 'Orbitron', monospace;
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(180,210,255,0.5);
+  }
+
+  /* ── PRODUCT ROW ── */
+  .product-row {
+    display: grid;
+    grid-template-columns: 28px 2fr 2.5fr 1fr 80px 90px;
+    gap: 8px;
+    align-items: center;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 6px;
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    transition: border-color 0.25s, background 0.25s, transform 0.25s, box-shadow 0.25s;
+    cursor: pointer;
+    position: relative; overflow: hidden;
+  }
+  .product-row::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at top left, rgba(30,100,220,0.04) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .product-row:hover {
+    border-color: rgba(30,100,220,0.35);
+    box-shadow: 0 0 30px rgba(30,100,220,0.08), 0 8px 24px rgba(0,0,0,0.4);
+    transform: translateY(-1px);
+  }
+  .product-row.selected {
+    border-color: var(--red);
+    background: rgba(30,100,220,0.09);
+    box-shadow: 0 0 40px rgba(30,100,220,0.14), 0 8px 24px rgba(0,0,0,0.5);
+  }
+
+  /* Checkbox */
+  .cb-wrap { display: flex; align-items: center; justify-content: center; }
+  .cb-wrap input[type="checkbox"] { display: none; }
+  .cb-box {
+    width: 16px; height: 16px;
+    border: 1.5px solid rgba(255,255,255,0.18);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .product-row.selected .cb-box {
+    border-color: var(--red-bright);
+    background: var(--red-bright);
+  }
+  .cb-box svg { display: none; }
+  .product-row.selected .cb-box svg { display: block; }
+
+  /* Columns */
+  .col-cat {
+    font-size: 12px; font-weight: 600;
+    color: rgba(255,255,255,0.95);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .col-name {
+    font-size: 12px; font-weight: 300;
+    color: rgba(180,210,255,0.7);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .col-price {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px; font-weight: 700;
+    color: rgba(255,255,255,0.95);
+    white-space: nowrap;
+  }
+  .price-range { font-size: 10px; font-weight: 400; color: rgba(180,210,255,0.55); }
+
+  /* Used Badge */
+  .used-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: 'Orbitron', monospace;
+    font-size: 8px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--orange);
+    background: rgba(56,191,255,0.1);
+    border: 1px solid rgba(56,191,255,0.35);
+    border-radius: 5px;
+    padding: 2px 6px;
+    margin-left: 6px;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  .used-badge::before {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--orange);
+    box-shadow: 0 0 6px var(--orange);
+    flex-shrink: 0;
+  }
+
+  /* Link */
+  .col-link a {
+    font-size: 10px; font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    text-decoration: none;
+    background: rgba(20,60,160,0.45);
+    border: 1px solid rgba(60,120,255,0.35);
+    border-radius: 6px;
+    padding: 3px 8px;
+    white-space: nowrap;
+    font-family: 'Orbitron', monospace;
+    letter-spacing: 0.05em;
+    transition: background 0.15s, border-color 0.15s;
+    display: inline-block;
+  }
+  .col-link a:hover {
+    background: rgba(30,80,200,0.65);
+    border-color: rgba(80,150,255,0.6);
+  }
+  .col-link .ebay {
+    color: var(--text-dim);
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.1);
+  }
+  .col-link .ebay:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.2);
+  }
+
+  /* Stepper */
+  .stepper {
+    display: flex; align-items: center; gap: 2px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 2px;
+    width: fit-content;
+  }
+  .stepper button {
+    background: rgba(255,255,255,0.04); border: none;
+    color: rgba(255,255,255,0.75);
+    font-size: 17px; line-height: 1;
+    cursor: pointer;
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 6px;
+    transition: color 0.12s, background 0.12s;
+    user-select: none;
+    flex-shrink: 0;
+  }
+  .stepper button:hover { color: rgba(255,255,255,1); background: rgba(255,255,255,0.1); }
+  .stepper button:active { background: rgba(60,120,255,0.3); }
+  .stepper .qty {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px; font-weight: 700;
+    color: rgba(255,255,255,0.95);
+    min-width: 22px; text-align: center;
+  }
+
+  /* ── TOTAL BAR ── */
+  .total-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(7, 7, 13, 0.92);
+    border-top: 1px solid var(--border);
+    backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+    padding: 18px 24px 24px;
+    z-index: 100;
+    box-shadow: 0 -20px 60px rgba(30,100,220,0.08);
+  }
+  .total-inner {
+    max-width: 960px; margin: 0 auto;
+    display: flex; align-items: flex-end;
+    justify-content: space-between; gap: 24px;
+  }
+  .total-label {
+    font-family: 'Orbitron', monospace;
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 5px;
+  }
+  .total-sum {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px; line-height: 1;
+    color: var(--text); letter-spacing: 0.02em;
+  }
+  .total-sum .currency {
+    font-size: 24px; color: var(--text-dim);
+    margin-right: 2px;
+    font-family: 'Inter', sans-serif; font-weight: 300;
+  }
+  .divider-bar {
+    width: 1px; height: 48px;
+    background: var(--border); flex-shrink: 0;
+  }
+  .per-person-block { text-align: right; }
+  .per-person-label {
+    font-family: 'Orbitron', monospace;
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 5px;
+  }
+  .per-person-sum {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px; line-height: 1;
+    color: var(--red-bright);
+    text-shadow: 0 0 24px rgba(77,163,255,0.5);
+    letter-spacing: 0.02em;
+  }
+  .per-person-sub {
+    font-size: 9px; letter-spacing: 0.1em;
+    color: var(--text-dim); margin-top: 3px;
+    text-transform: uppercase;
+  }
+  .selected-count {
+    font-family: 'Orbitron', monospace;
+    font-size: 9px; letter-spacing: 0.15em;
+    color: var(--text-dim); margin-top: 4px;
+    text-transform: uppercase;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 680px) {
+    .table-head { display: none; }
+    .product-row {
+      grid-template-columns: 28px 1fr 64px;
+      grid-template-rows: auto auto;
+      gap: 6px;
+    }
+    .col-name { grid-column: 2 / 3; }
+    .col-price { grid-column: 3 / 4; text-align: right; }
+    .col-link { grid-column: 2 / 3; }
+    .stepper { grid-column: 3 / 4; justify-self: end; }
+    .total-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .per-person-block { text-align: left; }
+    .divider-bar { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-orb bg-orb-1"></div>
+<div class="bg-orb bg-orb-2"></div>
+
+<div class="page-header">
+  <div class="page-eyebrow">Equipment Tracker · Operation Ebersberg</div>
+  <div class="page-title">GHOST<br>BUSTERS</div>
+  <div class="page-sub">Ausrüstungsliste · 31.10.26 · Vollständigkeit ist Pflicht</div>
+</div>
+
+<!-- GHOST BUSTERS SECTION -->
+<div class="section" id="section-ghost">
+  <div class="section-label">Ghost Busters Equipment</div>
+  <div class="table-head">
+    <div></div>
+    <div>Kategorie</div>
+    <div>Produkt</div>
+    <div>Preis</div>
+    <div>Link</div>
+    <div>Menge</div>
+  </div>
+</div>
+
+<!-- OPTIONAL SECTION -->
+<div class="section" id="section-optional">
+  <div class="section-label optional">Optional</div>
+  <div class="table-head">
+    <div></div>
+    <div>Kategorie</div>
+    <div>Produkt</div>
+    <div>Preis</div>
+    <div>Link</div>
+    <div>Menge</div>
+  </div>
+</div>
+
+<!-- TOTAL BAR -->
+<div class="total-bar">
+  <div class="total-inner">
+    <div>
+      <div class="total-label">Gesamtpreis (ausgewählt)</div>
+      <div class="total-sum"><span class="currency">€</span><span id="total-val">0</span></div>
+      <div class="selected-count" id="selected-count">Kein Produkt ausgewählt</div>
+    </div>
+    <div class="divider-bar"></div>
+    <div class="per-person-block">
+      <div class="per-person-label">Pro Person (÷ 3)</div>
+      <div class="per-person-sum">€<span id="per-person-val">0</span></div>
+      <div class="per-person-sub">bei 3 Personen</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const ghostItems = [
+  { cat: 'Uniform',             name: 'Ghost Busters Anzug',           price: 20,  priceMax: null, link: 'https://tinyurl.com/ykcjmjz8', linkLabel: 'tinyurl', qty: 3, emoji: '👻' },
+  { cat: 'Kamera',              name: 'SJCAM SJ4000',                  price: 10,  priceMax: 20,   link: 'https://www.ebay.com',          linkLabel: 'eBay',    qty: 3, emoji: '📷', used: true },
+  { cat: 'Taschenlampe',        name: 'flitonic LED Taschenlampe',     price: 20,  priceMax: null, link: 'https://tinyurl.com/3e4fxewz', linkLabel: 'tinyurl', qty: 2, emoji: '🔦' },
+  { cat: 'Kamera Zubehör',      name: 'ORBMART GoPro Accesoires',      price: 4,   priceMax: null, link: 'https://tinyurl.com/wbz53zf',  linkLabel: 'tinyurl', qty: 3, emoji: '🎥' },
+  { cat: 'Taschenlampenholster',name: 'Tactical Flashlight Pouch',     price: 3,   priceMax: null, link: 'https://tinyurl.com/3d6cwd69', linkLabel: 'tinyurl', qty: 2, emoji: '🗂️' },
+  { cat: 'Speicherkarten',      name: 'SanDisk Ultra 16GB microSD',    price: 13,  priceMax: null, link: 'https://www.ebay.com',          linkLabel: 'eBay',    qty: 3, emoji: '💾' },
+  { cat: 'Ladegerät',           name: 'USB Dual SJCAM SJ4000',         price: 10,  priceMax: null, link: 'https://tinyurl.com/yw9nkdft', linkLabel: 'tinyurl', qty: 1, emoji: '🔌' },
+  { cat: 'Akku',                name: 'Baxxtar PATONA Akku',           price: 15,  priceMax: null, link: 'https://tinyurl.com/4yk48ztz', linkLabel: 'tinyurl', qty: 2, emoji: '🔋' },
+  { cat: 'MicroSD Reader',      name: 'Vanja SD Kartenleser USB C',    price: 5,   priceMax: null, link: 'https://tinyurl.com/y7ayhm3y', linkLabel: 'tinyurl', qty: 1, emoji: '💿' },
+  { cat: 'Audiorekorder',       name: 'Zoom H1n',                      price: 60,  priceMax: null, link: 'https://www.ebay.com',          linkLabel: 'eBay',    qty: 1, emoji: '🎙️', used: true },
+  { cat: 'Feldwindschutz',      name: 'Zoom H1n Deadcat',              price: 8,   priceMax: null, link: 'https://tinyurl.com/2s4fk89r', linkLabel: 'tinyurl', qty: 1, emoji: '🌬️' },
+  { cat: 'Audiospeicherkarte',  name: 'Intenso Premium microSDHC 16GB',price: 5,   priceMax: null, link: 'https://tinyurl.com/4bphbjmd', linkLabel: 'tinyurl', qty: 1, emoji: '🗃️' },
+];
+
+const optionalItems = [
+  { cat: 'Taktischer Gürtel',    name: 'Tactical Quick Release',  price: 4, priceMax: null, link: 'https://tinyurl.com/bxs4vm46', linkLabel: 'tinyurl', qty: 1, emoji: '🪖' },
+  { cat: 'Walkie Talkie Halter', name: 'Tactical Radio Holder',   price: 6, priceMax: null, link: 'https://tinyurl.com/yc292abr', linkLabel: 'tinyurl', qty: 1, emoji: '📻' },
+];
+
+const state = {
+  ghost:    ghostItems.map(i => ({ ...i, selected: false, currentQty: 1 })),
+  optional: optionalItems.map(i => ({ ...i, selected: false, currentQty: 1 })),
+};
+
+function buildRow(item, index, group) {
+  const isEbay = item.linkLabel === 'eBay';
+  const priceDisplay = item.priceMax
+    ? `<span class="price-range">${item.price}–${item.priceMax}€</span>`
+    : `${item.price}€`;
+
+  const row = document.createElement('div');
+  row.className = 'product-row' + (item.selected ? ' selected' : '');
+  row.dataset.index = index;
+  row.dataset.group = group;
+
+  row.innerHTML = `
+    <div class="cb-wrap">
+      <div class="cb-box">
+        <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+          <path d="M1 4L3.5 6.5L9 1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+    <div class="col-cat">${item.emoji} ${item.cat}</div>
+    <div class="col-name">${item.name}${item.used ? '<span class="used-badge">Gebraucht</span>' : ''}</div>
+    <div class="col-price">${priceDisplay}</div>
+    <div class="col-link">
+      <a href="${item.link}" target="_blank" class="${isEbay ? 'ebay' : ''}">${isEbay ? 'eBay ↗' : 'Shop ↗'}</a>
+    </div>
+    <div class="stepper">
+      <button class="btn-minus">−</button>
+      <span class="qty">${item.currentQty}</span>
+      <button class="btn-plus">+</button>
+    </div>
+  `;
+
+  row.addEventListener('click', (e) => {
+    if (e.target.closest('.stepper') || e.target.closest('.col-link')) return;
+    toggleSelect(index, group);
+  });
+
+  const qtySpan = row.querySelector('.qty');
+  row.querySelector('.btn-minus').addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (state[group][index].currentQty > 1) {
+      state[group][index].currentQty--;
+      qtySpan.textContent = state[group][index].currentQty;
+      updateTotal();
+    }
+  });
+  row.querySelector('.btn-plus').addEventListener('click', (e) => {
+    e.stopPropagation();
+    state[group][index].currentQty++;
+    qtySpan.textContent = state[group][index].currentQty;
+    updateTotal();
+  });
+
+  return row;
+}
+
+function renderSection(group) {
+  const sectionId = group === 'ghost' ? 'section-ghost' : 'section-optional';
+  const section = document.getElementById(sectionId);
+  [...section.querySelectorAll('.product-row')].forEach(r => r.remove());
+  const frag = document.createDocumentFragment();
+  state[group].forEach((item, i) => frag.appendChild(buildRow(item, i, group)));
+  section.appendChild(frag);
+}
+
+function toggleSelect(index, group) {
+  state[group][index].selected = !state[group][index].selected;
+  const sectionId = group === 'ghost' ? 'section-ghost' : 'section-optional';
+  const rows = document.getElementById(sectionId).querySelectorAll('.product-row');
+  if (rows[index]) rows[index].classList.toggle('selected', state[group][index].selected);
+  updateTotal();
+}
+
+function updateTotal() {
+  let total = 0, count = 0;
+  ['ghost', 'optional'].forEach(group => {
+    state[group].forEach(item => {
+      if (item.selected) {
+        total += (item.priceMax ?? item.price) * item.currentQty;
+        count++;
+      }
+    });
+  });
+  document.getElementById('total-val').textContent = Number.isInteger(total) ? total : total.toFixed(2);
+  document.getElementById('per-person-val').textContent = (total / 3) % 1 === 0 ? (total / 3) : (total / 3).toFixed(2);
+  document.getElementById('selected-count').textContent = count === 0 ? 'Kein Produkt ausgewählt' : `${count} Produkt${count !== 1 ? 'e' : ''} ausgewählt`;
+}
+
+renderSection('ghost');
+renderSection('optional');
+updateTotal();
+</script>
+</body>
+</html>
