@@ -330,28 +330,16 @@ body::before {
   margin-bottom: 10px;
 }
 
-/* Left margin red line */
+/* Left margin red line entfernt */
 .doc-page::before {
-  content: '';
-  position: absolute;
-  left: 52px;
-  top: 0; bottom: 0;
-  width: 1px;
-  background: rgba(200, 40, 30, 0.35);
+  content: none;
+  display: none;
 }
 
-/* Hole punches */
+/* Hole punches entfernt */
 .doc-page::after {
-  content: '○\A○\A○';
-  white-space: pre;
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 12px;
-  color: var(--ink-dim);
-  line-height: 2.8;
-  letter-spacing: 0;
+  content: none;
+  display: none;
 }
 
 /* Deckblatt: keine rote Linie, keine Lochstanzung */
@@ -994,8 +982,7 @@ body::before {
 @media(max-width: 700px) {
   .cover-paper { padding: 36px 24px 36px 38px; }
   .doc-page { padding: 40px 22px 40px 38px; }
-  .doc-page::before { left: 30px; }
-  .doc-page::after { left: 8px; }
+
   .page-classified { right: 22px; top: 12px; font-size: 10px; }
   .page-num { right: 22px; }
   .agent-row { flex-direction: column; }
@@ -1209,7 +1196,7 @@ body::before {
       <div class="entry-text">
         <p>Es fing mit <span class="redact-word">Vernón</span> an. Nicht mit einem Plan, nicht mit einer Idee — mit einem Bild, das er nicht mehr loswurde. Er ging nachts, irgendwo zwischen Mitternacht und vier Uhr morgens, regelmäßig an einer <span class="redact-word">Schule</span> vorbei. Eine leere <span class="redact-word">Schule</span>. Eine <span class="redact-word">Schule</span>, die zu dieser Zeit leer sein <em>musste</em>. Und trotzdem brannten die Lichter. Nicht ein Fenster, nicht ein vergessenes Bürolicht — mehrere. Als würde dort drinnen jemand arbeiten, leben, warten.</p>
 
-        <p>Beim ersten Mal dachte er, es sei Zufall. Beim zweiten Mal griff er zur Kamera. Er filmte das Gebäude von außen, trat auf das Gelände — und die Aufnahme hörte auf. Kein Ruckeln, kein Absturz, keine Fehlermeldung. Einfach: weg. Als hätte das Schulgebäude entschieden, dass es heute Nacht nicht dokumentiert werden wollte. <span class="redact-word">Vernón</span> ging nach Hause und erzählte es niemandem. Vorerst.</p>
+        <p>Beim ersten Mal dachte er, es sei Zufall. Beim zweiten Mal griff er zur Kamera. Er filmte das Gebäude von außen, trat auf das Gelände — und die Aufnahme hörte auf. Kein Ruckeln, kein Absturz, keine Fehlermeldung. Einfach: weg. Als hätte das <span class="redact-word">Schulgebäude</span> entschieden, dass es heute Nacht nicht dokumentiert werden wollte. <span class="redact-word">Vernón</span> ging nach Hause und erzählte es niemandem. Vorerst.</p>
       </div>
 
       <div class="entry-rule"></div>
@@ -1351,7 +1338,7 @@ body::before {
       <div class="phase-header">
         <div class="phase-header-row">
           <div>
-            <div class="phase-eyebrow">Phase III · Ziel 1 · Schulinfiltration</div>
+            <div class="phase-eyebrow">Phase III · Ziel 1 · <span class="redact-word">Schulinfiltration</span></div>
             <div class="phase-title">Die verfluchte <span class="redact-word">Schule</span></div>
           </div>
           <div class="phase-time-badge">21:30 — 22:30</div>
@@ -1504,7 +1491,7 @@ body::before {
       <div class="entry-text">
         <p>Alle kehrten in ihre Operationsbasen zurück. Die Spannung blieb. Die Aufnahmen wurden noch einmal analysiert — diesmal allein, langsamer, mit mehr Licht und weniger Adrenalin. Ein Gruppenanruf wurde einberufen. Erfahrungen höher rangierter Divisionen wurden herangezogen. Winkel, Licht, Entfernung, Kontext — alles wurde geprüft.</p>
 
-        <p>Und dann sah jemand es. Wirklich sah es. Nicht das Phantom, nicht die Person — sondern das, was tatsächlich dort stand. Ein <strong>Straßenschild</strong>. Am Waldrand. Im Dunkeln, aus einem ungünstigen Winkel, nach einer halben Stunde Horrorgeschichten und einer gescheiterten Schulinfiltration: ein Straßenschild, das im Scheinwerferlicht der Handykamera für den Bruchteil einer Sekunde wie eine menschliche Silhouette ausgesehen hatte.</p>
+        <p>Und dann sah jemand es. Wirklich sah es. Nicht das Phantom, nicht die Person — sondern das, was tatsächlich dort stand. Ein <strong>Straßenschild</strong>. Am Waldrand. Im Dunkeln, aus einem ungünstigen Winkel, nach einer halben Stunde Horrorgeschichten und einer gescheiterten <span class="redact-word">Schulinfiltration</span>: ein Straßenschild, das im Scheinwerferlicht der Handykamera für den Bruchteil einer Sekunde wie eine menschliche Silhouette ausgesehen hatte.</p>
       </div>
 
       <div class="entry-quote">"Das Straßenschild war immer da. Es hat uns nur nie interessiert. Bis <span class="redact-word">Lee</span> es für einen Geist hielt und die gesamte Division in Panik rannte."</div>
@@ -1627,7 +1614,7 @@ body::before {
           </div>
 
           <div style="font-size:12px;color:var(--ink-mid);line-height:1.7;font-family:'Courier Prime',monospace;margin-bottom:20px;">
-            Sämtliche Bild- und Videoaufnahmen des Einsatzes vom <strong>03. Juni 2026</strong>. Enthält Schul-Außenaufnahmen, Forst-Material sowie die entscheidende Sequenz, in der Objekt „Straßenschild" identifiziert wurde. Klassifiziert: <strong>STRENG GEHEIM</strong>.
+            Sämtliche Bild- und Videoaufnahmen des Einsatzes vom <strong>03. Juni 2026</strong>. Enthält <span class="redact-word">Schul-Außenaufnahmen</span>, Forst-Material sowie die entscheidende Sequenz, in der Objekt „Straßenschild" identifiziert wurde. Klassifiziert: <strong>STRENG GEHEIM</strong>.
           </div>
 
           <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
@@ -1809,6 +1796,7 @@ body::before {
 <script>
 (function(){
   var PASSWORD = "FML";
+  var PASSWORD2 = "HWFD";
   var form = document.getElementById('page6-form');
   var input = document.getElementById('page6-input');
   var error = document.getElementById('page6-error');
@@ -1828,6 +1816,8 @@ body::before {
     var val = (input.value || '').trim().toUpperCase();
     if (val === PASSWORD) {
       unlockAll();
+    } else if (val === PASSWORD2) {
+      window.location.href = 'hamza_files.html';
     } else {
       error.textContent = 'ZUGRIFF VERWEIGERT — CODE UNGÜLTIG';
       input.value = '';
